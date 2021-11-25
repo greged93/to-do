@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
+
 contract TodoList {
     // This will be the contract for the Todo list.
     // It will be able to do the following:
@@ -43,7 +44,7 @@ contract TodoList {
     function done(uint _index) public {
         require(!paused, 'contract currently paused');
         Todo storage todo = todos[_index];
-        require(msg.sender == todo.owner);
+        require(msg.sender == todo.owner, 'can only be marked done by owner');
         todo.done = true;
         emit TodoDone(todo.name, todo.owner);
     }
